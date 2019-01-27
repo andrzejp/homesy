@@ -18,7 +18,7 @@ class TitleScene extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'title_bg').setOrigin(0).setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
-        this.spaceMan = this.add.image(150, 150, 'earthman');
+        this.spaceMan = this.add.image(150, 200, 'earthman');
         this.add.image(this.centerX(), this.centerY(), 'title').setOrigin(0.5,1);
 
         this.input.manager.enabled = true;
@@ -35,7 +35,6 @@ class TitleScene extends Phaser.Scene {
         };
 
         const add = this.add;
-        const input = this.input;
 
 
         WebFont.load({
@@ -55,7 +54,7 @@ class TitleScene extends Phaser.Scene {
 
             tweens: [
                 {
-                    y: 100,
+                    y: 120,
                     ease: 'Sine.easeInOut',
                     duration: 3000,
                     yoyo: true

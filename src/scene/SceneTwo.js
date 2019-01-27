@@ -30,7 +30,7 @@ class SceneTwo extends Phaser.Scene {
         this.load.svg('planetPurple', 'assets/planet_purple.svg');
         this.load.svg('bigStar', 'assets/star.svg', {height: 30, width: 30});
         this.load.svg('smallStar', 'assets/star.svg', {height: 10, width: 10});
-        this.load.svg('person', 'assets/heart.svg');
+        this.load.svg('person', 'assets/heart.svg', {height: 60, width: 60});
         this.load.image('earth', 'assets/earth.png');
     }
 
