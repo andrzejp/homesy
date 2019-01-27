@@ -1,9 +1,9 @@
 import Spaceman from '../sprite/spaceman.js'
 
-class MainScene extends Phaser.Scene {
+class SceneOne extends Phaser.Scene {
     constructor() {
         super({
-            key: 'MainScene',
+            key: 'SceneOne',
             physics: {
                 default: 'impact',
                 impact: {
@@ -51,7 +51,7 @@ class MainScene extends Phaser.Scene {
         this.input.manager.enabled = true;
 
         this.input.once('pointerdown', function () {
-            this.scene.switch('EndScene');
+            this.scene.switch('SceneTwo');
         }, this);
     }
 
@@ -93,4 +93,4 @@ class MainScene extends Phaser.Scene {
     }
 }
 
-export default MainScene;
+export default SceneOne;
