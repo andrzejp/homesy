@@ -27,7 +27,7 @@ class SceneOne extends Phaser.Scene {
         this.load.svg('planetPurple', 'assets/planet_purple.svg');
         this.load.svg('bigStar', 'assets/star.svg', {height: 30, width: 30});
         this.load.svg('smallStar', 'assets/star.svg', {height: 10, width: 10});
-        this.load.image('asteroid', 'assets/asteroid.png');
+        this.load.svg('plant', 'assets/plant.svg', {height: 80, width: 80});
     }
 
     create() {
@@ -57,7 +57,7 @@ class SceneOne extends Phaser.Scene {
 
         this.spaceman.setTypeA().setCheckAgainstB().setActiveCollision();
         this.spaceman.setCollideCallback(this.spacemanCollision, this);
-        this.createAsteroid();
+        this.createPlant();
 
 
 
@@ -73,24 +73,24 @@ class SceneOne extends Phaser.Scene {
         }
     }
 
-    createAsteroid() {
-        for (let i = 0; i < 16; i++)
+    createPlant() {
+        for (let i = 0; i < 10; i++)
         {
             const x = Phaser.Math.Between(100, 3100);
             const y = Phaser.Math.Between(100, 300);
 
-            const asteroid = this.impact.add.image(x, y, 'asteroid');
+            const plant = this.impact.add.image(x, y, 'plant');
 
-            asteroid.setLiteCollision().setBounce(1).setBodyScale(0.5);
-            asteroid.setVelocity(Phaser.Math.Between(20, 60), Phaser.Math.Between(20, 60));
+            plant.setLiteCollision().setBounce(1);
+            plant.setVelocity(Phaser.Math.Between(150, 300), Phaser.Math.Between(150, 300));
 
             if (Math.random() > 0.5)
             {
-                asteroid.vel.x *= -1;
+                plant.vel.x *= -1;
             }
             else
             {
-                asteroid.vel.y *= -1;
+                plant.vel.y *= -1;
             }
         }
     }
