@@ -42,7 +42,9 @@ class SceneOne extends Phaser.Scene {
 
         // this.add.image(0, 106, 'bgFront').setOrigin(0); //Uncomment for extra background
 
-        this.text = this.add.text(10, 10, '', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0);
+        this.progressText = this.add.text(10, 10, '', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0);
+        this.helpText = this.add.text(512, 600, 'Collect 10 things to continue', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0).setOrigin(0.5, 1);
+
 
         this.input.manager.enabled = true;
 
@@ -96,7 +98,7 @@ class SceneOne extends Phaser.Scene {
     update() {
         this.spaceman.update(this.cursors);
 
-        this.text.setText('Collected ' + this.collection + ' things');
+        this.progressText.setText('Collected ' + this.collection + ' things');
 
         this.cameras.main.scrollX = this.spaceman.x - 512;
     }
