@@ -50,6 +50,12 @@ class MainScene extends Phaser.Scene {
 
         this.text = this.add.text(10, 10, '', { font: '16px Courier', fill: '#00ff00' }).setDepth(1).
         setScrollFactor(0);
+
+        this.input.manager.enabled = true;
+
+        this.input.once('pointerdown', function () {
+          this.scene.switch('EndScene');
+        }, this);
     }
 
     update ()
@@ -90,8 +96,6 @@ class MainScene extends Phaser.Scene {
             }
 
             child.setScrollFactor(scrollFactor);
-
-        }, this);
     }
 }
 export default MainScene;
