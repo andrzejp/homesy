@@ -42,7 +42,7 @@ class SceneOne extends Phaser.Scene {
 
         // this.add.image(0, 106, 'bgFront').setOrigin(0); //Uncomment for extra background
 
-        this.text = this.add.text(10, 10, '', {font: '16px Courier', fill: '#00ff00'}).setDepth(1).setScrollFactor(0);
+        this.text = this.add.text(10, 10, '', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0);
 
         this.input.manager.enabled = true;
 
@@ -50,10 +50,45 @@ class SceneOne extends Phaser.Scene {
             this.scene.switch('SceneTwo');
         }, this);
 
-        this.asteroid = this.impact.add.image(350,200,'asteroid');
         this.spaceman.setTypeA().setCheckAgainstB().setActiveCollision();
-        this.asteroid.setTypeB().setCheckAgainstA().setFixedCollision();
-        this.spaceman.setCollideCallback(function() {console.info("COLLISION WOOO");}, this);
+        this.spaceman.setCollideCallback(this.spacemanCollision, this);
+        this.createAsteroid();
+
+        this.collection = 0;
+
+
+    }
+
+    spacemanCollision(a, b) {
+        if(b.gameObject != null) {
+            b.gameObject.destroy(this);
+            this.collection += 1;
+        }
+        if(this.collection >= 10) {
+            this.scene.switch('SceneTwo');
+        }
+    }
+
+    createAsteroid() {
+        for (let i = 0; i < 16; i++)
+        {
+            const x = Phaser.Math.Between(100, 3100);
+            const y = Phaser.Math.Between(100, 300);
+
+            const asteroid = this.impact.add.image(x, y, 'asteroid');
+
+            asteroid.setLiteCollision().setBounce(1).setBodyScale(0.5);
+            asteroid.setVelocity(Phaser.Math.Between(20, 60), Phaser.Math.Between(20, 60));
+
+            if (Math.random() > 0.5)
+            {
+                asteroid.vel.x *= -1;
+            }
+            else
+            {
+                asteroid.vel.y *= -1;
+            }
+        }
     }
 
 
@@ -61,7 +96,7 @@ class SceneOne extends Phaser.Scene {
     update() {
         this.spaceman.update(this.cursors);
 
-        this.text.setText('Found way home: ' + this.spaceman.humanityPercent);
+        this.text.setText('Collected ' + this.collection + ' things');
 
         this.cameras.main.scrollX = this.spaceman.x - 512;
     }
