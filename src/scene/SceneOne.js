@@ -27,17 +27,15 @@ class SceneOne extends Phaser.Scene {
         this.load.svg('planetPurple', 'assets/planet_purple.svg');
         this.load.svg('bigStar', 'assets/star.svg', {height: 30, width: 30});
         this.load.svg('smallStar', 'assets/star.svg', {height: 10, width: 10});
-
+        this.load.image('asteroid', 'assets/asteroid.png');
     }
 
     create() {
-
         this.cameras.main.setBounds(0, 0, 3200, 600);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.add.image(0, 0, 'bgBack').setOrigin(0);
-        console.info(this);
         this.spaceman = this.add.existing(new Spaceman(this.impact.world, 100, 200, this));
         this.createPlanets();
         this.createStarfield();
@@ -51,7 +49,14 @@ class SceneOne extends Phaser.Scene {
         this.input.once('pointerdown', function () {
             this.scene.switch('SceneTwo');
         }, this);
+
+        this.asteroid = this.impact.add.image(350,200,'asteroid');
+        this.spaceman.setTypeA().setCheckAgainstB().setActiveCollision();
+        this.asteroid.setTypeB().setCheckAgainstA().setFixedCollision();
+        this.spaceman.setCollideCallback(function() {console.info("COLLISION WOOO");}, this);
     }
+
+
 
     update() {
         this.spaceman.update(this.cursors);
