@@ -34,7 +34,6 @@ class SceneOne extends Phaser.Scene {
         this.amountToCollect = 10;
         this.collected = 0;
 
-
         this.cameras.main.setBounds(0, 0, 3200, 600);
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -69,7 +68,7 @@ class SceneOne extends Phaser.Scene {
             this.collected += 1;
         }
         if(this.collected >= 10) {
-            this.scene.switch('SceneTwo');
+            this.scene.switch('AfterSceneOne');
         }
     }
 
@@ -101,8 +100,8 @@ class SceneOne extends Phaser.Scene {
         this.spaceman.update(this.cursors);
         let remainingThings = this.amountToCollect - this.collected;
         this.helpText.setText("Collect " + remainingThings + " thing" + (remainingThings === 1 ? "":'s') + " to continue");
-
         this.cameras.main.scrollX = this.spaceman.x - 512;
+
     }
 
     createPlanets() {
