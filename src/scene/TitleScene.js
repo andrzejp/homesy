@@ -7,8 +7,10 @@ class TitleScene extends Phaser.Scene {
 
     preload() {
         this.load.svg('bg', 'assets/bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
-        this.load.svg('earthman', 'assets/earthman/000.svg', {width: 300, height: 300});
-        this.load.svg('title', 'assets/title/title.svg', {width: 800, height: 285});
+        this.load.svg('earthman', 'assets/earthMan.svg', {width: 300, height: 300});
+        this.load.svg('title', 'assets/title.svg', {width: 800, height: 285});
+
+        this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     }
 
     create() {
