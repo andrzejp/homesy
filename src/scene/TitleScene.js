@@ -33,11 +33,11 @@ class TitleScene extends Phaser.Scene {
 
         WebFont.load({
             google: {
-                families: [ 'Freckle Face', 'Finger Paint', 'Nosifer' ]
+                families: [ 'Orbitron' ]
             },
             active: function ()
             {
-                add.text(80, 400, 'The Journey Home...', { fontFamily: 'Freckle Face', fontSize: 80, color: '#ffffff' }).setShadow(2, 2, "#333333", 2, false, true);
+                add.text(80, 400, 'The Journey Home...', { fontFamily: 'Orbitron', fontSize: 80, color: '#ffffff' }).setShadow(2, 2, "#333333", 2, false, true);
             }
         });
 
