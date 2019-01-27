@@ -23,11 +23,7 @@ class TitleScene extends Phaser.Scene {
 
         this.input.manager.enabled = true;
 
-        this.input.once('pointerdown', function () {
-
-            this.scene.switch('SceneOne');
-
-        }, this);
+        this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // press F to go full-screen!
         document.onkeydown = (ev) => {
@@ -66,6 +62,10 @@ class TitleScene extends Phaser.Scene {
 
     update() {
         this.spaceMan.rotation += 0.001;
+
+        if (this.keySpace.isDown) {
+            this.scene.switch('SceneOne');
+        }
     }
 
     centerX ()
