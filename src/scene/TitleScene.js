@@ -36,7 +36,6 @@ class TitleScene extends Phaser.Scene {
 
         const add = this.add;
 
-
         WebFont.load({
             google: {
                 families: [ 'Orbitron' ]
@@ -44,6 +43,7 @@ class TitleScene extends Phaser.Scene {
             active: function ()
             {
                 add.text(80, 400, 'The Journey Home...', { fontFamily: 'Orbitron', fontSize: 40, color: '#ffffff' }).setShadow(2, 2, "#333333", 2, false, true);
+                add.text(512, 560, 'F - Full Screen   SPACE - Start Game', {font: '16px Courier', fill: '#ffffff'}).setOrigin(0.5, 1);
             }
         });
 
