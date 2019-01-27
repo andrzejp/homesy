@@ -27,36 +27,80 @@ class SceneOne extends Phaser.Scene {
         this.load.svg('planetPurple', 'assets/planet_purple.svg');
         this.load.svg('bigStar', 'assets/star.svg', {height: 30, width: 30});
         this.load.svg('smallStar', 'assets/star.svg', {height: 10, width: 10});
-
+        this.load.image('asteroid', 'assets/asteroid.png');
     }
 
     create() {
+        this.amountToCollect = 10;
+        this.collected = 0;
+
 
         this.cameras.main.setBounds(0, 0, 3200, 600);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.add.image(0, 0, 'bgBack').setOrigin(0);
-        console.info(this);
         this.spaceman = this.add.existing(new Spaceman(this.impact.world, 100, 200, this));
         this.createPlanets();
         this.createStarfield();
 
         // this.add.image(0, 106, 'bgFront').setOrigin(0); //Uncomment for extra background
 
-        this.text = this.add.text(10, 10, '', {font: '16px Courier', fill: '#00ff00'}).setDepth(1).setScrollFactor(0);
+        this.helpText = this.add.text(512, 600, 'Collect '+ this.amountToCollect + ' things to continue', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0).setOrigin(0.5, 1);
+
 
         this.input.manager.enabled = true;
 
         this.input.once('pointerdown', function () {
             this.scene.switch('SceneTwo');
         }, this);
+
+        this.spaceman.setTypeA().setCheckAgainstB().setActiveCollision();
+        this.spaceman.setCollideCallback(this.spacemanCollision, this);
+        this.createAsteroid();
+
+
+
     }
+
+    spacemanCollision(a, b) {
+        if(b.gameObject != null) {
+            b.gameObject.destroy(this);
+            this.collected += 1;
+        }
+        if(this.collected >= 10) {
+            this.scene.switch('SceneTwo');
+        }
+    }
+
+    createAsteroid() {
+        for (let i = 0; i < 16; i++)
+        {
+            const x = Phaser.Math.Between(100, 3100);
+            const y = Phaser.Math.Between(100, 300);
+
+            const asteroid = this.impact.add.image(x, y, 'asteroid');
+
+            asteroid.setLiteCollision().setBounce(1).setBodyScale(0.5);
+            asteroid.setVelocity(Phaser.Math.Between(20, 60), Phaser.Math.Between(20, 60));
+
+            if (Math.random() > 0.5)
+            {
+                asteroid.vel.x *= -1;
+            }
+            else
+            {
+                asteroid.vel.y *= -1;
+            }
+        }
+    }
+
+
 
     update() {
         this.spaceman.update(this.cursors);
-
-        this.text.setText('Found way home: ' + this.spaceman.humanityPercent);
+        let remainingThings = this.amountToCollect - this.collected;
+        this.helpText.setText("Collect " + remainingThings + " thing" + (remainingThings === 1 ? "":'s') + " to continue");
 
         this.cameras.main.scrollX = this.spaceman.x - 512;
     }

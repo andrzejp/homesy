@@ -8,7 +8,8 @@ class TitleScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.svg('title_bg', 'assets/title_bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
+        // this.load.svg('title_bg', 'assets/title_bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
+        this.load.image('title_bg', 'assets/title_bg.png');
         this.load.svg('earthman', 'assets/earthMan.svg', {width: 250, height: 250});
         this.load.svg('title', 'assets/title.svg', {width: 741, height: 139});
 
@@ -16,8 +17,8 @@ class TitleScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(0, 0, 'title_bg').setOrigin(0);
-        this.spaceMan = this.add.image(150, 150, 'earthman');
+        this.add.image(0, 0, 'title_bg').setOrigin(0).setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+        this.spaceMan = this.add.image(150, 200, 'earthman');
         this.add.image(this.centerX(), this.centerY(), 'title').setOrigin(0.5,1);
 
         this.input.manager.enabled = true;
@@ -34,7 +35,6 @@ class TitleScene extends Phaser.Scene {
         };
 
         const add = this.add;
-        const input = this.input;
 
 
         WebFont.load({
@@ -54,7 +54,7 @@ class TitleScene extends Phaser.Scene {
 
             tweens: [
                 {
-                    y: 100,
+                    y: 120,
                     ease: 'Sine.easeInOut',
                     duration: 3000,
                     yoyo: true

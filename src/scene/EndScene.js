@@ -12,7 +12,7 @@ class EndScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(0, 0, 'title_bg').setOrigin(0);
+        this.add.image(0, 0, 'title_bg').setOrigin(0).setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
         var add = this.add;
         var input = this.input;
