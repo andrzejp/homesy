@@ -19,7 +19,6 @@ class SceneTwo extends Phaser.Scene {
         });
         this.goal = 12;
         this.collected = 0;
-        this.textBottom = 'Bring all of your loved ones home to finish your journey!'
     }
 
     preload() {
@@ -46,8 +45,9 @@ class SceneTwo extends Phaser.Scene {
         this.add.image(1250, 189, 'earth').setOrigin(0);
         this.createPeople();
 
-        this.textTop = this.add.text(10, 10, '', {font: '16px Courier', fill: '#00ff00'}).setDepth(1).setScrollFactor(0);
-        this.add.text(470, 10, this.textBottom, {font: '16px Courier', fill: '#ffffff'}).setDepth(1).setScrollFactor(0);
+        this.helpText = this.add.text(512, 0, 'Bring '+ this.goal + ' of your loved ones home to finish your journey!',
+            {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0).setOrigin(0.5, 0);
+
         this.input.manager.enabled = true;
 
     }
@@ -112,10 +112,11 @@ class SceneTwo extends Phaser.Scene {
 
     update() {
         this.spaceman.update(this.cursors);
+        let remaining = this.goal - this.collected;
+        this.helpText.setText("Bring " + remaining + " of your loved ones home to finish your journey!");
 
-        this.textTop.setText('People at home: ' + this.collected + ' / ' + this.goal);
         if (this.collected > 0 && this.collected === this.goal) {
-            this.scene.switch('SceneThree');
+            this.scene.switch('EndScene');
         }
 
         this.cameras.main.scrollX = this.spaceman.x - 512;
