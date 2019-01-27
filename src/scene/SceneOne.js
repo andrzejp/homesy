@@ -31,6 +31,10 @@ class SceneOne extends Phaser.Scene {
     }
 
     create() {
+        this.amountToCollect = 10;
+        this.collected = 0;
+
+
         this.cameras.main.setBounds(0, 0, 3200, 600);
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -42,8 +46,7 @@ class SceneOne extends Phaser.Scene {
 
         // this.add.image(0, 106, 'bgFront').setOrigin(0); //Uncomment for extra background
 
-        this.progressText = this.add.text(10, 10, '', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0);
-        this.helpText = this.add.text(512, 600, 'Collect 10 things to continue', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0).setOrigin(0.5, 1);
+        this.helpText = this.add.text(512, 600, 'Collect '+ this.amountToCollect + ' things to continue', {font: '16px Orbitron', fill: '#fff'}).setDepth(1).setScrollFactor(0).setOrigin(0.5, 1);
 
 
         this.input.manager.enabled = true;
@@ -56,7 +59,6 @@ class SceneOne extends Phaser.Scene {
         this.spaceman.setCollideCallback(this.spacemanCollision, this);
         this.createAsteroid();
 
-        this.collection = 0;
 
 
     }
@@ -64,9 +66,9 @@ class SceneOne extends Phaser.Scene {
     spacemanCollision(a, b) {
         if(b.gameObject != null) {
             b.gameObject.destroy(this);
-            this.collection += 1;
+            this.collected += 1;
         }
-        if(this.collection >= 10) {
+        if(this.collected >= 10) {
             this.scene.switch('SceneTwo');
         }
     }
@@ -97,8 +99,8 @@ class SceneOne extends Phaser.Scene {
 
     update() {
         this.spaceman.update(this.cursors);
-
-        this.progressText.setText('Collected ' + this.collection + ' things');
+        let remainingThings = this.amountToCollect - this.collected;
+        this.helpText.setText("Collect " + remainingThings + " thing" + (remainingThings === 1 ? "":'s') + " to continue");
 
         this.cameras.main.scrollX = this.spaceman.x - 512;
     }
