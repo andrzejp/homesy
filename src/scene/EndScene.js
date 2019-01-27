@@ -7,12 +7,12 @@ class EndScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.svg('bg', 'assets/bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
+        // this.load.svg('title_bg', 'assets/title_bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height}); already loaded from title
         this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     }
 
     create() {
-        this.add.image(0, 0, 'bg').setOrigin(0);
+        this.add.image(0, 0, 'title_bg').setOrigin(0);
 
         var add = this.add;
         var input = this.input;
