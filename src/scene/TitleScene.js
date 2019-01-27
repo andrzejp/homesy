@@ -28,6 +28,11 @@ class TitleScene extends Phaser.Scene {
 
         }, this);
 
+        // press F to go full-screen!
+        document.onkeydown = (ev) => {
+            if (ev.key === 'f') document.querySelector('canvas').requestFullscreen();
+        };
+
         var add = this.add;
         var input = this.input;
 
