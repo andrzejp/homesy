@@ -8,7 +8,7 @@ class TitleScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.svg('bg', 'assets/title_bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
+        this.load.svg('title_bg', 'assets/title_bg.svg', {width: this.sys.game.config.width, height: this.sys.game.config.height});
         this.load.svg('earthman', 'assets/earthMan.svg', {width: 250, height: 250});
         this.load.svg('title', 'assets/title.svg', {width: 741, height: 139});
 
@@ -16,7 +16,7 @@ class TitleScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(0, 0, 'bg').setOrigin(0);
+        this.add.image(0, 0, 'title_bg').setOrigin(0);
         this.spaceMan = this.add.image(150, 150, 'earthman');
         this.add.image(this.centerX(), this.centerY(), 'title').setOrigin(0.5,1);
 
