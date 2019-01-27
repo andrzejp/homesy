@@ -24,7 +24,7 @@ class TitleScene extends Phaser.Scene {
 
         this.input.once('pointerdown', function () {
 
-            this.scene.switch('MainScene');
+            this.scene.switch('SceneOne');
 
         }, this);
 
