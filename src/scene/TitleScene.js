@@ -24,12 +24,18 @@ class TitleScene extends Phaser.Scene {
 
         this.input.once('pointerdown', function () {
 
-            this.scene.switch('MainScene');
+            this.scene.switch('SceneOne');
 
         }, this);
 
+        // press F to go full-screen!
+        document.onkeydown = (ev) => {
+            if (ev.key === 'f') document.querySelector('canvas').requestFullscreen();
+        };
+
         const add = this.add;
         const input = this.input;
+
 
         WebFont.load({
             google: {
