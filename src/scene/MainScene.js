@@ -11,6 +11,14 @@ class MainScene extends Phaser.Scene {
 
     create() {
         this.bg = this.add.image(0, 0, 'bg').setOrigin(0);
+
+        this.input.manager.enabled = true;
+
+        this.input.once('pointerdown', function () {
+
+            this.scene.switch('EndScene');
+
+        }, this);
     }
 }
 export default MainScene;

@@ -1,4 +1,6 @@
 class TitleScene extends Phaser.Scene {
+   // spaceMan;
+
     constructor() {
         super({
             key: 'TitleScene'
