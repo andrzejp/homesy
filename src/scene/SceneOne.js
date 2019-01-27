@@ -38,13 +38,11 @@ class SceneOne extends Phaser.Scene {
 
         this.add.image(0, 0, 'bgBack').setOrigin(0);
         console.info(this);
-        this.spaceman = this.add.existing(new Spaceman(this.impact.world, 1600, 200, this));
+        this.spaceman = this.add.existing(new Spaceman(this.impact.world, 100, 200, this));
         this.createPlanets();
         this.createStarfield();
 
         // this.add.image(0, 106, 'bgFront').setOrigin(0); //Uncomment for extra background
-        // this.createAnimations();
-
 
         this.text = this.add.text(10, 10, '', {font: '16px Courier', fill: '#00ff00'}).setDepth(1).setScrollFactor(0);
 
